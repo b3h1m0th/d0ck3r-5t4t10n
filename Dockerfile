@@ -1,46 +1,74 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:alpine321
+FROM ghcr.io/linuxserver/baseimage-selkies:debiantrixie
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG XFCE_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="d0ck3rt0p"
+LABEL maintainer="thelamer and mods by harumph"
 
 # title
-ENV TITLE="Alpine XFCE"
+ENV TITLE="Debian XFCE harumph edition"
 
 RUN \
   echo "**** add icon ****" && \
-  curl -o \
-    /kclient/public/icon.png \
-    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
+  curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
+  curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
+  curl https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb -o bitwarden.deb && \
+  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   echo "**** install packages ****" && \
-  apk add --no-cache \
-    chromium \
-    firefox \
-    faenza-icon-theme \
-    faenza-icon-theme-xfce4-appfinder \
-    faenza-icon-theme-xfce4-panel \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+  apt install -y --no-install-recommends \
+    firefox-esr \
+    wget \
+    gstreamer1.0-pipewire \
+    firefox-esr-l10n-all \
+    elementary-xfce-icon-theme \
+    greybird-gtk-theme \
+    libxfce4ui-utils \
     mousepad \
-    ristretto \
     thunar \
-    util-linux-misc \
-    xfce4 \
-    xfce4-terminal && \
-  echo "**** cleanup ****" && \
+    xfce4-appfinder \
+    xfce4-panel \
+    xfce4-session \
+    xfce4-settings \
+    xfce4-taskmanager \
+    xfce4-terminal \
+    xfconf \
+    xfdesktop4 \
+    xfwm4 && \
+  cat surfshark-install.sh && \
+  sh surfshark-install.sh && \
+  dpkg -i bitwarden.deb && \ 
+  dpkg -i rustdesk-1.4.2-x86_64.deb && \
+  apt-get install -f -y && \
+  echo "**** xfce tweaks ****" && \
+#  sed -i \
+#    's#^Exec=.*#Exec=/usr/local/bin/wrapped-chromium#g' \
+#    /usr/share/applications/chromium.desktop && \
+  mv \
+    /usr/bin/exo-open \
+    /usr/bin/exo-open-real && \
+  mv \
+    /usr/bin/thunar \
+    /usr/bin/thunar-real && \
   rm -f \
-    /etc/xdg/autostart/xfce4-power-manager.desktop \
-    /etc/xdg/autostart/xscreensaver.desktop \
-    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
+    /etc/xdg/autostart/xscreensaver.desktop && \
+  echo "**** cleanup ****" && \
+  apt autoclean && \
   rm -rf \
     /config/.cache \
-    /tmp/*
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/* \
+    bitwarden.deb \
+    rustdesk-1.4.2-x86_64.deb \
+    surfshark-install.sh 
+  
 
 # add local files
 COPY /root /
 
 # ports and volumes
 EXPOSE 3000
-
 VOLUME /config
