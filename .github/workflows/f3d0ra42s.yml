@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./f3d0ra42
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/k45mt0p:f3d0ra42
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:f3d0ra42
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/k45mt0p:f3d0ra42
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:f3d0ra42
           docker ps
