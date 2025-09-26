@@ -11,7 +11,7 @@ ENV TITLE="b3h1m0th"
 
 RUN \
   echo "**** add icon ****" && \
-  curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
+  curl https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png -o /usr/share/selkies/www/icon.png && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
