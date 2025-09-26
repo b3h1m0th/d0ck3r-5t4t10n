@@ -29,12 +29,6 @@ RUN echo "**** add and configure LDAP ****" && \
 RUN mkdir -p /etc/sssd/ && touch /etc/sssd/sssd.conf && chmod 600 /etc/sssd/sssd.conf
 RUN touch /etc/krb5.conf && chmod 644 /etc/krb5.conf
 
-# Install Steam
-# (Steam also requires RPM FUSION)
-RUN echo "**** add steam ****" && \
-    dnf -y config-manager setopt fedora-cisco-openh264.enabled=1
-RUN dnf -y install steam
-
 RUN \
   echo "**** add icon ****" && \
   curl -o \
