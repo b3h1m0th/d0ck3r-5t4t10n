@@ -5,7 +5,7 @@ ARG BUILD_DATE
 ARG VERSION
 ARG XFCE_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer"
+LABEL maintainer="d0ck3rt0p"
 
 # title
 ENV TITLE="Alpine XFCE"
@@ -18,6 +18,7 @@ RUN \
   echo "**** install packages ****" && \
   apk add --no-cache \
     chromium \
+    firefox \
     faenza-icon-theme \
     faenza-icon-theme-xfce4-appfinder \
     faenza-icon-theme-xfce4-panel \
