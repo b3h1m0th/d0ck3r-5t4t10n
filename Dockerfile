@@ -23,6 +23,7 @@ RUN \
     firefox \
     wget \
     gstreamer \
+    gstreamer-plugins-good \
     adwaita-xfce-icon-theme \
     chromium \
     mousepad \
