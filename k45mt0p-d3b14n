@@ -24,6 +24,7 @@ RUN \
     dolphin \
     gwenview \
     wget \
+    libxdo3 \
     firefox-esr \
     gstreamer1.0-pipewire \
     kde-config-gtk-style \
