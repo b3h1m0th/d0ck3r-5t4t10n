@@ -1,67 +1,56 @@
-FROM ghcr.io/linuxserver/baseimage-selkies:debiantrixie
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-selkies:alpine322
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
+ARG XFCE_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="b3h1m0th"
+LABEL maintainer="thelamer mods by b3h1m0th"
 
 # title
-ENV TITLE="b3h1m0th"
+ENV TITLE="41p1n3322"
 
 RUN \
   echo "**** add icon ****" && \
-  curl https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png -o /usr/share/selkies/www/icon.png && \
+  curl -o \
+    /usr/share/selkies/www/icon.png \
+    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
   echo "**** install packages ****" && \
-  apt-get update && \
-  DEBIAN_FRONTEND=noninteractive \
-  apt install -y --no-install-recommends \
-    firefox-esr \
+  apk add --no-cache \
+    adw-gtk3 \
+    firefox \
     wget \
     gstreamer1.0-pipewire \
-    firefox-esr-l10n-all \
-    elementary-xfce-icon-theme \
-    greybird-gtk-theme \
-    libxfce4ui-utils \
+    adwaita-xfce-icon-theme \
+    chromium \
     mousepad \
+    ristretto \
     thunar \
-    xfce4-appfinder \
-    xfce4-panel \
-    xfce4-session \
-    xfce4-settings \
-    xfce4-taskmanager \
-    xfce4-terminal \
-    xfconf \
-    xfdesktop4 \
-    xfwm4 && \
+    util-linux-misc \
+    xfce4 \
+    xfce4-terminal && \
   wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   dpkg -i rustdesk-1.4.2-x86_64.deb && \
-  apt-get install -f -y && \
-  echo "**** xfce tweaks ****" && \
-#  sed -i \
-#    's#^Exec=.*#Exec=/usr/local/bin/wrapped-chromium#g' \
-#    /usr/share/applications/chromium.desktop && \
-  mv \
-    /usr/bin/exo-open \
-    /usr/bin/exo-open-real && \
+  echo "**** xfce-tweaks ****" && \
   mv \
     /usr/bin/thunar \
     /usr/bin/thunar-real && \
-  rm -f \
-    /etc/xdg/autostart/xscreensaver.desktop && \
   echo "**** cleanup ****" && \
-  apt autoclean && \
+  rm -f \
+    /etc/xdg/autostart/xfce4-power-manager.desktop \
+    /etc/xdg/autostart/xscreensaver.desktop \
+    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
+  rm -rf rustdesk-1.4.2-x86_64.deb && \
   rm -rf \
     /config/.cache \
-    /var/lib/apt/lists/* \
-    /var/tmp/* \
-    /tmp/* \
-    rustdesk-1.4.2-x86_64.deb
-  
+    /tmp/*
 
 # add local files
 COPY /root /
 
 # ports and volumes
-EXPOSE 3000
+EXPOSE 3001
+
 VOLUME /config
