@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/11nuk5:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:latest
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/11nuk5:latest
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:latest
           docker ps
