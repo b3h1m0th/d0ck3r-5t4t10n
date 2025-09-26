@@ -1,4 +1,4 @@
-name: Build and Push f3d0ra42-t3mp
+name: Build and Push f3d0ra42
 
 on:
   workflow_dispatch:
@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./k45mt0p-ubun2
+          file: ./f3d0ra42
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k45mt0p:f3d0ra42
 
