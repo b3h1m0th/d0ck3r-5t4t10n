@@ -23,6 +23,9 @@ RUN \
     ca-certificates \
     dolphin \
     gwenview \
+    wget \
+    firefox-esr \
+    gstreamer1.0-pipewire \
     kde-config-gtk-style \
     kdialog \
     kfind \
@@ -38,6 +41,8 @@ RUN \
     plasma-workspace \
     qml-module-qt-labs-platform \
     systemsettings && \
+  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
+  dpkg -i rustdesk-1.4.2-x86_64.deb && \
   echo "**** kde tweaks ****" && \
   sed -i \
     's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g' \
@@ -47,7 +52,8 @@ RUN \
  && rm -rf \
     /config/.cache \
     /var/tmp/* \
-    /tmp/*
+    /tmp/* \
+    rustdesk-1.4.2-x86_64.deb
 
 # add local files
 COPY root/defaults /defaults
@@ -65,15 +71,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && chmod +x /config/.config/code-server/start \
  && ln -s .config/code-server/start /config/code-server \
  && chown -R abc:staff /config/.config/code-server \
- && apt-get clean && rm -fr /var/lib/apt/lists/*
-
-# Google Chrome
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends \
- wget libu2f-udev \
- && curl -sLO "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb" \
- && ( apt-get install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb || echo "Code: $?" ) \
- && rm google-chrome-stable_current_amd64.deb \
  && apt-get clean && rm -fr /var/lib/apt/lists/*
 
 # Fonts and Language
