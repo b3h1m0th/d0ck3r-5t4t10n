@@ -1,10 +1,10 @@
-name: webtop 0.0.3
+name: d0ck3rt0p 0.0.2
 
 on:
   workflow_dispatch:
 
 jobs:
-  run-webtop:
+  d0ck3rt0p:
     runs-on: ubuntu-latest
 
     steps:
