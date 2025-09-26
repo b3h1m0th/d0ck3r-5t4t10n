@@ -8,15 +8,17 @@ LABEL maintainer="thelamer mods by b3h1m0th"
 
 # title
 ENV TITLE="f3d0ra42-KDE" \
-    NO_GAMEPAD=true
-
+   
 RUN echo "**** add default tools ****" && \
     dnf -y install \
-        sudo       \
-        curl       \
-        git        \
-        vim        \
-        neovim
+        sudo \
+        curl \
+        git \
+        vim \
+        neovim \
+        firefox \
+        thunderbird \
+        libreoffice
 
 RUN echo "**** add and configure LDAP ****" && \
     dnf -y install \
@@ -32,13 +34,6 @@ RUN touch /etc/krb5.conf && chmod 644 /etc/krb5.conf
 RUN echo "**** add steam ****" && \
     dnf -y config-manager setopt fedora-cisco-openh264.enabled=1
 RUN dnf -y install steam
-
-# Install default office packages
-RUN echo "**** add default office tools ****" && \
-    dnf -y install  \
-        firefox     \
-        thunderbird \
-        libreoffice
 
 RUN \
   echo "**** add icon ****" && \
