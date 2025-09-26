@@ -22,7 +22,7 @@ jobs:
           -v /config:/config \
           --shm-size="1gb" \
           --restart unless-stopped \
-          r014nd5m1th/d0ck3rt0p:pixie
+          r014nd5m1th/d0ck3rt0p:dotrixie
 
       - name: Show running containers
         run: docker ps
