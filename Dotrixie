@@ -13,7 +13,6 @@ RUN \
   echo "**** add icon ****" && \
   curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
   curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
-  wget https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb -o bitwarden.deb && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
@@ -34,9 +33,6 @@ RUN \
     xfconf \
     xfdesktop4 \
     xfwm4 && \
-  cat surfshark-install.sh && \
-  sh surfshark-install.sh && \
-  dpkg -i bitwarden.deb && \ 
   apt-get install -f -y && \
   echo "**** xfce tweaks ****" && \
 #  sed -i \
@@ -57,8 +53,6 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/* \
     /tmp/* \
-    bitwarden.deb \
-    surfshark-install.sh 
   
 
 # add local files
