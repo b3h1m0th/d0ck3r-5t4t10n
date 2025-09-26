@@ -7,7 +7,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 LABEL maintainer="thelamer and mods by harumph"
 
 # title
-ENV TITLE="Debian XFCE harumph edition"
+ENV TITLE="d3tr1x13"
 
 RUN \
   echo "**** add icon ****" && \
