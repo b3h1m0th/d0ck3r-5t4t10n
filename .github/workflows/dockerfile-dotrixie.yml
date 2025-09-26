@@ -1,4 +1,4 @@
-name: Build and Push Docker pixie
+name: Build and Push dotrixie
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./Doprixie
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:pixie
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:dotrixie
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:pixie
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:dotrixie
           docker ps
