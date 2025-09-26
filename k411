@@ -1,6 +1,4 @@
-# syntax=docker/dockerfile:1
-
-FROM ghcr.io/linuxserver/baseimage-selkies:alpine322
+FROM ghcr.io/linuxserver/baseimage-selkies:kali
 
 # set version label
 ARG BUILD_DATE
@@ -10,7 +8,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 LABEL maintainer="thelamer mods by b3h1m0th"
 
 # title
-ENV TITLE="41p1n3322"
+ENV TITLE="k411"
 
 RUN \
   echo "**** add icon ****" && \
