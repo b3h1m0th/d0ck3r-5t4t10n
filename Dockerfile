@@ -31,7 +31,7 @@ RUN \
     xfce4 \
     xfce4-terminal && \
   wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
-  dpkg -i rustdesk-1.4.2-x86_64.deb && \
+  apk add rustdesk-1.4.2-x86_64.deb && \
   echo "**** xfce-tweaks ****" && \
   mv \
     /usr/bin/thunar \
