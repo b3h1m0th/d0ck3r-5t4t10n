@@ -1,17 +1,17 @@
-name: dotrixie 0.0.1
+name: d3tr1x13 0.0.1
 
 on:
   workflow_dispatch:
 
 jobs:
-  dotrixie:
+  d0ck3rt0p:
     runs-on: ubuntu-latest
 
     steps:
       - name: Run container
         run: |
           docker run -d \
-          --name=dotrixie \
+          --name=d0ck3rt0p \
           --cap-add=NET_ADMIN \
           --security-opt seccomp=unconfined `#optional` \
           -e PUID=1000 \
@@ -22,7 +22,7 @@ jobs:
           -v /config:/config \
           --shm-size="1gb" \
           --restart unless-stopped \
-          r014nd5m1th/d0ck3rt0p:dotrixie
+          r014nd5m1th/d0ck3rt0p:d3tr1x13
 
       - name: Show running containers
         run: docker ps
