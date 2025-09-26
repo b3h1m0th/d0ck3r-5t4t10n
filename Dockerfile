@@ -18,7 +18,6 @@ RUN \
   DEBIAN_FRONTEND=noninteractive \
   apt install -y --no-install-recommends \
     firefox-esr \
-    wget \
     gstreamer1.0-pipewire \
     firefox-esr-l10n-all \
     elementary-xfce-icon-theme \
