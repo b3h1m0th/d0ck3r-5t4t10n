@@ -1,4 +1,4 @@
-name: d0ck3rt0p 0.0.2
+name: d0ck3rt0p 0.0.3
 
 on:
   workflow_dispatch:
@@ -11,7 +11,7 @@ jobs:
       - name: Run container
         run: |
           docker run -d \
-          --name=webtop \
+          --name=d0ck3rt0p \
           --cap-add=NET_ADMIN \
           --security-opt seccomp=unconfined `#optional` \
           -e PUID=1000 \
