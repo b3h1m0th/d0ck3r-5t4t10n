@@ -19,7 +19,6 @@ RUN echo "**** add default tools ****" && \
         firefox \
         thunderbird \
         libreoffice
-
 RUN echo "**** add and configure LDAP ****" && \
     dnf -y install \
         sssd \
