@@ -4,17 +4,14 @@ FROM ghcr.io/linuxserver/baseimage-selkies:debiantrixie
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer and mods by harumph"
+LABEL maintainer="b3h1m0th"
 
 # title
-ENV TITLE="Debian XFCE harumph edition"
+ENV TITLE="b3h1m0th"
 
 RUN \
   echo "**** add icon ****" && \
   curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
-  curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
-  curl https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb -o bitwarden.deb && \
-  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
