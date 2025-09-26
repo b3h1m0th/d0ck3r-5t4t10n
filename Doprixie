@@ -13,7 +13,6 @@ RUN \
   echo "**** add icon ****" && \
   curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
   curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
-  curl -f https://bitwarden.com/download/?app=desktop&platform=linux&variant=deb -o bitwarden.deb && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
