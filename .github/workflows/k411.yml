@@ -1,4 +1,4 @@
-name: Build and Push Docker m1nt
+name: Build and Push Docker k411
 
 on:
   workflow_dispatch:
@@ -24,9 +24,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./m1nt
+          file: ./k411
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:m1nt
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:k411
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:m1nt
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:k411
           docker ps
