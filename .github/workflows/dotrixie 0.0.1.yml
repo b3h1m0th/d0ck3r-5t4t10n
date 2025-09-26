@@ -1,17 +1,17 @@
-name: d0ck3rt0p-pixie 0.0.1
+name: dotrixie 0.0.1
 
 on:
   workflow_dispatch:
 
 jobs:
-  d0ck3rt0p:
+  dotrixie:
     runs-on: ubuntu-latest
 
     steps:
       - name: Run container
         run: |
           docker run -d \
-          --name=d0ck3rt0p \
+          --name=dotrixie \
           --cap-add=NET_ADMIN \
           --security-opt seccomp=unconfined `#optional` \
           -e PUID=1000 \
