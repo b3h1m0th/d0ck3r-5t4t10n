@@ -1,4 +1,4 @@
-name: Build and Push ubun2n0b13
+name: Build and Push f1r3f0x
 
 on:
   workflow_dispatch:
@@ -24,9 +24,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./ubun2n0b13
+          file: ./f1r3f0x
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:ubun2n0b13
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:f1r3f0x
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:ubun2n0b13
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:f1r3f0x
           docker ps
