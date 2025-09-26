@@ -12,12 +12,12 @@ ENV TITLE="b3h1m0th"
 RUN \
   echo "**** add icon ****" && \
   curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
-  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
   apt install -y --no-install-recommends \
     firefox-esr \
+    wget \
     gstreamer1.0-pipewire \
     firefox-esr-l10n-all \
     elementary-xfce-icon-theme \
@@ -34,6 +34,7 @@ RUN \
     xfconf \
     xfdesktop4 \
     xfwm4 && \
+  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   dpkg -i rustdesk-1.4.2-x86_64.deb && \
   apt-get install -f -y && \
   echo "**** xfce tweaks ****" && \
