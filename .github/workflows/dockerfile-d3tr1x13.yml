@@ -1,4 +1,4 @@
-name: Build and Push dotrixie
+name: Build and Push d3tr1x13
 
 on:
   workflow_dispatch:
@@ -24,9 +24,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dotrixie
+          file: ./d3tr1x13
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:dotrixie
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:d3tr1x13
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:dotrixie
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:d3tr1x13
           docker ps
