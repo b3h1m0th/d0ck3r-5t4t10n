@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push d3b14n-t3mp
 
 on:
   workflow_dispatch:
