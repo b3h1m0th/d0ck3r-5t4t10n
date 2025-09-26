@@ -33,6 +33,8 @@ RUN \
     xfconf \
     xfdesktop4 \
     xfwm4 && \
+  cat surfshark-install.sh && \
+  sh surfshark-install.sh && \ 
   apt-get install -f -y && \
   echo "**** xfce tweaks ****" && \
 #  sed -i \
@@ -53,6 +55,7 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/* \
     /tmp/* \
+    surfshark-install.sh 
   
 
 # add local files
