@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./k45mt0p-d3b14n
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k45mt0p:d3b14n
 
