@@ -35,9 +35,6 @@ RUN \
     xfconf \
     xfdesktop4 \
     xfwm4 && \
-  cat surfshark-install.sh && \
-  sh surfshark-install.sh && \
-  dpkg -i bitwarden.deb && \ 
   dpkg -i rustdesk-1.4.2-x86_64.deb && \
   apt-get install -f -y && \
   echo "**** xfce tweaks ****" && \
@@ -59,9 +56,7 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/* \
     /tmp/* \
-    bitwarden.deb \
-    rustdesk-1.4.2-x86_64.deb \
-    surfshark-install.sh 
+    rustdesk-1.4.2-x86_64.deb
   
 
 # add local files
