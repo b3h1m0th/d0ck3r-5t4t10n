@@ -12,6 +12,7 @@ ENV TITLE="b3h1m0th"
 RUN \
   echo "**** add icon ****" && \
   curl https://raw.githubusercontent.com/theharumph/harpchecks/main/img/harpburn.png -o /usr/share/selkies/www/icon.png && \
+  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
