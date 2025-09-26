@@ -53,6 +53,7 @@ RUN \
     /etc/xdg/autostart/xscreensaver.desktop && \
   echo "**** cleanup ****" && \
   apt autoclean && \
+  rm -rf rustdesk-1.4.2-x86_64.deb && \
   rm -rf \
     /config/.cache \
     /var/lib/apt/lists/* \
