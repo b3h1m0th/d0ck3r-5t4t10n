@@ -1,55 +1,70 @@
-FROM ghcr.io/linuxserver/baseimage-selkies:kali
+FROM ghcr.io/linuxserver/baseimage-selkies:ubuntunoble
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG XFCE_VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="thelamer mods by b3h1m0th"
 
 # title
-ENV TITLE="k411"
+ENV TITLE="ubun2n0b13"
 
 RUN \
   echo "**** add icon ****" && \
-  curl -o \
-    /usr/share/selkies/www/icon.png \
-    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
+  curl https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png -o /usr/share/selkies/www/icon.png && \
+  curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
   echo "**** install packages ****" && \
-  apk add --no-cache \
-    adw-gtk3 \
+  apt-get update && \
+  DEBIAN_FRONTEND=noninteractive \
+  apt install -y --no-install-recommends \
     firefox \
     wget \
-    gstreamer \
-    gstreamer-plugins-good \
-    adwaita-xfce-icon-theme \
-    chromium \
+    gstreamer1.0-pipewire \
+    elementary-xfce-icon-theme \
+    greybird-gtk-theme \
+    libxfce4ui-utils \
     mousepad \
-    ristretto \
     thunar \
-    util-linux-misc \
-    xfce4 \
-    xfce4-terminal && \
+    xfce4-appfinder \
+    xfce4-panel \
+    xfce4-session \
+    xfce4-settings \
+    xfce4-taskmanager \
+    xfce4-terminal \
+    xfconf \
+    xfdesktop4 \
+    xfwm4 && \
+  cat surfshark-install.sh && \
+  sh surfshark-install.sh && \ 
   wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
   dpkg -i rustdesk-1.4.2-x86_64.deb && \
-  echo "**** xfce-tweaks ****" && \
+  apt-get install -f -y && \
+  echo "**** xfce tweaks ****" && \
+#  sed -i \
+#    's#^Exec=.*#Exec=/usr/local/bin/wrapped-chromium#g' \
+#    /usr/share/applications/chromium.desktop && \
+  mv \
+    /usr/bin/exo-open \
+    /usr/bin/exo-open-real && \
   mv \
     /usr/bin/thunar \
     /usr/bin/thunar-real && \
-  echo "**** cleanup ****" && \
   rm -f \
-    /etc/xdg/autostart/xfce4-power-manager.desktop \
-    /etc/xdg/autostart/xscreensaver.desktop \
-    /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop && \
+    /etc/xdg/autostart/xscreensaver.desktop && \
+  echo "**** cleanup ****" && \
+  apt autoclean && \
   rm -rf rustdesk-1.4.2-x86_64.deb && \
   rm -rf \
     /config/.cache \
-    /tmp/*
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/* \
+    surfshark-install.sh 
+  
 
 # add local files
 COPY /root /
 
 # ports and volumes
-EXPOSE 3001
-
+EXPOSE 3000
 VOLUME /config
