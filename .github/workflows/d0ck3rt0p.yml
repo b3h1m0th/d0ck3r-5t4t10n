@@ -22,7 +22,7 @@ jobs:
           -v /config:/config \
           --shm-size="1gb" \
           --restart unless-stopped \
-          lscr.io/linuxserver/webtop:ubuntu-xfce 
+          r014nd5m1th/d0ck3rt0p:latest
 
       - name: Show running containers
         run: docker ps
