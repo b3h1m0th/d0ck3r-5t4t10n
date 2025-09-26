@@ -1,4 +1,4 @@
-name: d0ck3rt0p 0.0.3
+name: d0ck3rt0p-pixie 0.0.1
 
 on:
   workflow_dispatch:
