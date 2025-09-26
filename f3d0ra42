@@ -1,0 +1,86 @@
+FROM ghcr.io/linuxserver/baseimage-selkies:fedora42
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thelamer"
+
+# title
+ENV TITLE="Fedora KDE" \
+    NO_GAMEPAD=true
+
+RUN echo "**** add default tools ****" && \
+    dnf -y install \
+        sudo       \
+        curl       \
+        git        \
+        vim        \
+        neovim
+
+RUN echo "**** add and configure LDAP ****" && \
+    dnf -y install \
+        sssd \
+        sssd-ldap \
+        sssd-krb5 \
+        krb5-workstation
+RUN mkdir -p /etc/sssd/ && touch /etc/sssd/sssd.conf && chmod 600 /etc/sssd/sssd.conf
+RUN touch /etc/krb5.conf && chmod 644 /etc/krb5.conf
+
+# Install Steam
+# (Steam also requires RPM FUSION)
+RUN echo "**** add steam ****" && \
+    dnf -y config-manager setopt fedora-cisco-openh264.enabled=1
+RUN dnf -y install steam
+
+# Install default office packages
+RUN echo "**** add default office tools ****" && \
+    dnf -y install  \
+        firefox     \
+        thunderbird \
+        libreoffice
+
+RUN \
+  echo "**** add icon ****" && \
+  curl -o \
+    /usr/share/selkies/www/icon.png \
+    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
+  echo "**** install packages ****" && \
+  dnf install -y --setopt=install_weak_deps=False --best \
+    breeze-icon-theme \
+    dolphin \
+    kde-gtk-config \
+    kde-settings-pulseaudio \
+    kde-wallpapers \
+    kdialog \
+    kfind \
+    kmenuedit \
+    konsole5 \
+    kwrite \
+    plasma-breeze \
+    plasma-desktop \
+    plasma-systemmonitor \
+    plasma-workspace-xorg \
+    qt5-qtscript && \
+  echo "**** kde tweaks ****" && \
+  sed -i \
+    's/applications:org.kde.discover.desktop,/applications:org.kde.konsole.desktop,/g' \
+    /usr/share/plasma/plasmoids/org.kde.plasma.taskmanager/contents/config/main.xml && \
+  rm -f \
+    /etc/xdg/autostart/at-spi-dbus-bus.desktop \
+    /etc/xdg/autostart/gmenudbusmenuproxy.desktop \
+    /etc/xdg/autostart/polkit-kde-authentication-agent-1.desktop \
+    /etc/xdg/autostart/powerdevil.desktop && \
+  echo "**** cleanup ****" && \
+  dnf autoremove -y && \
+  dnf clean all && \
+  rm -rf \
+    /config/.cache \
+    /tmp/*
+
+# add local files
+COPY /root /
+
+# ports and volumes
+EXPOSE 3000
+VOLUME /config
