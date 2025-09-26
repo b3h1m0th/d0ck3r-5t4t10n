@@ -22,7 +22,7 @@ RUN \
     adw-gtk3 \
     firefox \
     wget \
-    gstreamer1.0-pipewire \
+    gstreamer \
     adwaita-xfce-icon-theme \
     chromium \
     mousepad \
