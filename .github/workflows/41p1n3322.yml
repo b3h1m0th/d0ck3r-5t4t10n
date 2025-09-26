@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build and Push Docker 41p1n3322
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:41p1n3322
 
       - name: list images
         run: |
@@ -34,5 +34,5 @@ jobs:
 
       - name: run image
         run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:latest
+          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/d0ck3rt0p:41p1n3322
           docker ps
