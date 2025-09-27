@@ -16,7 +16,7 @@ RUN \
   echo "**** install packages ****" && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
-  apt install -y --no-install-recommends \
+  apt-get install -y --no-install-recommends \
     firefox \
     wget \
     gstreamer1.0-pipewire \
