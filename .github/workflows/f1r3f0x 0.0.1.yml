@@ -13,6 +13,7 @@ jobs:
           docker run -d \
           --name=f1r3f0x \
           --cap-add=NET_ADMIN \
+          --privileged \
           --security-opt seccomp=unconfined `#optional` \
           -e PUID=1000 \
           -e PGID=1000 \
