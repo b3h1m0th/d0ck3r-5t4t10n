@@ -25,7 +25,7 @@ jobs:
           -v /path/to/docker-data:/var/lib/docker \
           --shm-size="1gb" \
           --restart unless-stopped \
-          r014nd5m1th/k45mt0p:41p1n3321
+          r014nd5m1th/r3m1x:t3st
 
       - name: Show running containers
         run: docker ps
