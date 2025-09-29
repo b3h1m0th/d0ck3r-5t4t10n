@@ -89,11 +89,6 @@ The application can be accessed at:
 
 * https://yourhost:3001/
 
-### Strict reverse proxies
-
-This image uses a self-signed certificate by default. This naturally means the scheme is `https`.
-If you are using a reverse proxy which validates certificates, you need to [disable this check for the container](https://docs.linuxserver.io/faq#strict-proxy).
-
 **Modern GUI desktop apps may have compatibility issues with the latest Docker syscall restrictions. You can use Docker with the `--security-opt seccomp=unconfined` setting to allow these syscalls on hosts with older Kernels or libseccomp versions.**
 
 ### Security
@@ -364,72 +359,4 @@ We publish various [Docker Mods](https://github.com/linuxserver/docker-mods) to 
 ## Updating Info
 
 Most of our images are static, versioned, and require an image update and container recreation to update the app inside. With some exceptions (noted in the relevant readme.md), we do not recommend or support updating apps inside the container. Please consult the [Application Setup](#application-setup) section above to see if it is recommended for the image.
-
-Below are the instructions for updating containers:
-
-### Via Docker Compose
-
-* Update images:
-    * All images:
-
-        ```bash
-        docker-compose pull
-        ```
-
-    * Single image:
-
-        ```bash
-        docker-compose pull webtop
-        ```
-
-* Update containers:
-    * All containers:
-
-        ```bash
-        docker-compose up -d
-        ```
-
-    * Single container:
-
-        ```bash
-        docker-compose up -d webtop
-        ```
-
-* You can also remove the old dangling images:
-
-    ```bash
-    docker image prune
-    ```
-
-### Via Docker Run
-
-* Update the image:
-
-    ```bash
-    docker pull lscr.io/linuxserver/webtop:latest
-    ```
-
-* Stop the running container:
-
-    ```bash
-    docker stop webtop
-    ```
-
-* Delete the container:
-
-    ```bash
-    docker rm webtop
-    ```
-
-* Recreate a new container with the same docker run parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
-* You can also remove the old dangling images:
-
-    ```bash
-    docker image prune
-    ```
-
-### Image Update Notifications - Diun (Docker Image Update Notifier)
-
->[!TIP]
->We recommend [Diun](https://crazymax.dev/diun/) for update notifications. Other tools that automatically update containers unattended are not recommended or supported.
 
