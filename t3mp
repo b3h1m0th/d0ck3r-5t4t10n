@@ -16,6 +16,7 @@ RUN \
   apt-get install -y --no-install-recommends \
     chromium \
     chromium-l10n \
+    firefox \
     dolphin \
     gwenview \
     kde-config-gtk-style \
