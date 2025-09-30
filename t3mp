@@ -12,9 +12,6 @@ LABEL maintainer="b3"
 ENV TITLE="Ubun2 XFCE"
 ARG DEBIAN_FRONTEND=noninteractive
 
-# prevent Ubuntu's firefox stub from being installed
-COPY /root/etc/apt/preferences.d/firefox-no-snap /etc/apt/preferences.d/firefox-no-snap
-
 RUN \
   echo "**** add icon ****" && \
   curl -o \
