@@ -1,66 +1,46 @@
-FROM ghcr.io/linuxserver/baseimage-selkies:kali
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntunoble
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="thelamer mods by b3h1m0th"
+LABEL maintainer="b3"
 
 # title
-ENV TITLE="k411"
+ENV TITLE="Ubun2 XFCE"
+ARG DEBIAN_FRONTEND=noninteractive
+
+# prevent Ubuntu's firefox stub from being installed
+COPY /root/etc/apt/preferences.d/firefox-no-snap /etc/apt/preferences.d/firefox-no-snap
 
 RUN \
   echo "**** add icon ****" && \
-  curl https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png -o /usr/share/selkies/www/icon.png && \
-  curl https://downloads.surfshark.com/linux/debian-install.sh -o surfshark-install.sh && \
+  curl -o \
+    /kclient/public/icon.png \
+    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/webtop-logo.png && \
   echo "**** install packages ****" && \
+  add-apt-repository -y ppa:mozillateam/ppa && \
   apt-get update && \
-  DEBIAN_FRONTEND=noninteractive \
-  apt-get install -y --no-install-recommends \
+  apt-get install --no-install-recommends -y \
     firefox \
-    wget \
-    gstreamer1.0-pipewire \
-    elementary-xfce-icon-theme \
-    greybird-gtk-theme \
-    libxfce4ui-utils \
     mousepad \
-    thunar \
-    xfce4-appfinder \
-    xfce4-panel \
-    xfce4-session \
-    xfce4-settings \
-    xfce4-taskmanager \
     xfce4-terminal \
-    xfconf \
-    xfdesktop4 \
-    xfwm4 && \
-  cat surfshark-install.sh && \
-  sh surfshark-install.sh && \ 
-  wget -q https://github.com/rustdesk/rustdesk/releases/download/1.4.2/rustdesk-1.4.2-x86_64.deb && \
-  dpkg -i rustdesk-1.4.2-x86_64.deb && \
-  apt-get install -f -y && \
+    xfce4 \
+    xubuntu-default-settings \
+    xubuntu-icon-theme && \
   echo "**** xfce tweaks ****" && \
-#  sed -i \
-#    's#^Exec=.*#Exec=/usr/local/bin/wrapped-chromium#g' \
-#    /usr/share/applications/chromium.desktop && \
-  mv \
-    /usr/bin/exo-open \
-    /usr/bin/exo-open-real && \
-  mv \
-    /usr/bin/thunar \
-    /usr/bin/thunar-real && \
   rm -f \
     /etc/xdg/autostart/xscreensaver.desktop && \
   echo "**** cleanup ****" && \
-  apt autoclean && \
-  rm -rf rustdesk-1.4.2-x86_64.deb && \
+  apt-get autoclean && \
   rm -rf \
     /config/.cache \
+    /config/.launchpadlib \
     /var/lib/apt/lists/* \
     /var/tmp/* \
-    /tmp/* \
-    surfshark-install.sh 
-  
+    /tmp/*
 
 # add local files
 COPY /root /
