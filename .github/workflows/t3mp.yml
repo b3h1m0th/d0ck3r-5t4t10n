@@ -1,0 +1,17 @@
+name: ubun2nb
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bpg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build the image
+        run : |
+          docker build -f t3mp -t ubun2:nb .
+          docker images
+  
