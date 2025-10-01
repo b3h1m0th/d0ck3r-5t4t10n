@@ -1,38 +1,26 @@
-name: Build and Push f1r3f0x
+name: build and push to ghcr
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  bpg:
+    runs-on: ubuntu-24.04-arm
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Log in to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./f1r3f0x
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/f1r3f0x
-
-      - name: list images
-        run: |
+      - uses: actions/checkout@v3
+      
+      - name: Build the image
+        run : |
+          docker build -f Dockerfile -t rem1x:deb .
           docker images
-
-      - name: run image
-        run: |
-          docker run -d --rm ${{ secrets.DOCKERHUB_USERNAME }}/f1r3f0x
-          docker ps
+  
+      - name: Login
+        run : |
+          docker login --username b3h1m0th --password ${{ secrets.GHCR }} ghcr.io
+          
+      - name: ls commit and tag the image
+        run : |
+          docker images
+          docker tag rem1x:deb ghcr.io/b3h1m0th/temp:ub
+          docker images
