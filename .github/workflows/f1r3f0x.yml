@@ -12,7 +12,7 @@ jobs:
       
       - name: Build the image
         run : |
-          docker build -f Dockerfile -t rem1x:deb .
+          docker build -f f1r3f0x -t rem1x:deb .
           docker images
   
       - name: Login
