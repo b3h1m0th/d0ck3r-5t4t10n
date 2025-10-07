@@ -1,0 +1,26 @@
+name: build and push to ghcr
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bpg:
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build the image
+        run : |
+          docker build -f f1r3f0x -t rem1x:deb .
+          docker images
+  
+      - name: Login
+        run : |
+          docker login --username b3h1m0th --password ${{ secrets.GHCR }} ghcr.io
+          
+      - name: ls commit and tag the image
+        run : |
+          docker images
+          docker tag rem1x:deb ghcr.io/b3h1m0th/temp:ub
+          docker images
